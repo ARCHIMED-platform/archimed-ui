@@ -30,7 +30,7 @@ Node(
         #hskip(100em),
         :div,
         dom"img"(src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAABXklEQVQokXVRy07CUBS8+B82sYkE2gCVRJT4I0TiPxS4LZQVon8juOKlXKy90ZUgid6qK1wQDSXRaELE3bjANKHi7CYz52TOGUICiPNyUmFmVu0W9+O8nAzqPtSWsRdl5q3U0yE7BmTHgMR0RHvmINam6eWtZ9bOZrfwrXILVVGH7bmwPYFDUYPCLYQZnSc6ZmrhRmUt0si5KrfAvQcEcem5ULiFSCN/T4AQiXeM5DrTceye+qbRzMPzbOrzI7cOielQzw2NRDuFA9mhuJo++QbxMYb7OfY5nz5iw6FQWoXsyoHmyxCt1+HqgUS3tCUFIvXfRhi8j3xeFb+ROsUEARCKNHJC4RYuPffP0fZELI5u5u4IECKEEJLomakwo3OFW6iIGi4mAr2JQEWcLN7aLXxp7dL2UhexNk1HGe1LTIfsUMgOXRTHzJt4K7/7b+PadVlT7WJGtYsZzS5rQf0HFSNALodgStgAAAAASUVORK5CYII=")
-)
+)                    
 
 
 ##########################Left-side, Parameters 1= Textboxes###########################
@@ -102,10 +102,26 @@ cache_radiation= radiobuttons(optionsr,label="Cache radiation")
 
 
 
-param2=vbox(hbox(
-    icon,All_in_turtle,icon,scattering,icon,toricity),
+param2=vbox(hbox(icon,All_in_turtle,icon,scattering,icon,toricity),
    hbox(icon,cache_pixel_table,hskip(50px),icon,cache_radiation) 
 )
+
+
+param2= vbox(
+        vskip(50px),
+        hbox(hbox(hskip(10px),
+        icon,hskip(5px),All_in_turtle),hbox(icon,hskip(5px),scattering),hbox(icon,hskip(5px),toricity)),
+        vskip(20px),#hskip(148px),
+        hbox(hbox(hskip(10px),
+        icon,hskip(5px),cache_pixel_table), hbox(hskip(20px),icon,hskip(5px),cache_radiation)))
+        
+        vskip(20px),
+        hbox(icon,hskip(5px),scene_rotation),
+        vskip(10px),
+        hbox(icon,hskip(5px),radiation_tps), 
+        vskip(10px),
+        hbox(icon,hskip(5px),pixel_size)
+
 
 
 
@@ -113,7 +129,7 @@ param2=vbox(hbox(
 w= Window()
 body!(w,param2)
 
-#First(draft) way to buil param2
+# WARNING : Don't execute this code. this is the first(draft) way to buil param2
 
 
 optionsr = Observable(["True", "False"])
@@ -155,7 +171,7 @@ divparam2= Node(
       #"hello world",
        style=Dict(
         :backgroundColor => "rgba(241, 247, 213, 0.25)",#rgba(241, 247, 213, 0.39)
-        :padding=>"70px"
+        #:padding=>"70px"
         #:border=>"solid"
 
     ),
@@ -165,8 +181,7 @@ divparam2= Node(
 
 # Put the div on top of radiobuttons(parameter 2)
 
-param2bis=vbox(
-divparam2,vline(), param2,vline()#param2#param2#, vline() #hbox(param2, #div2)
+param2bis=vbox(divparam2,vline(),vskip(77px), hbox(param2,vline()) #param2#param2#, vline() #hbox(param2, #div2)
 
 )
 
@@ -186,12 +201,23 @@ div1= Node(
         #Add a vertical line
        style=Dict(
         :backgroundColor => "white",#rgba(196, 196, 196, 0.18)#rgba(241, 247, 213, 0.39)rgba(241, 247, 213, 0.25)
-       :padding=>"60px"
+       :padding=>"60px",
         #:border=>"solid 1px grey"
 
     ),
     
 )
+
+
+#Test : Add div1 on the left of param1
+param_1=hbox(#div1,
+vline(),
+param1)
+
+# Show the result
+w= Window()
+body!(w,param_1)
+
 
 logo=
 
@@ -199,9 +225,10 @@ Node(
         #hskip(100em),
         :div,
         dom"img"(src= "data:image/jpeg;base64,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")
+        
 )
 
-#logo test
+# WARNINH : logo test WARNING : Don't execute this code.
 vbox(
 #vskip(50px),
 #dom"img"(src= "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0OEA8QDQ0NDQ0NEA0QEBAODg8NEBAQFREYIhYTExMZHTQsGCYxJxMTLTQtMTU3Ojo6Iys4OzM4OCswMDcBCgoKDg0OGRAQGTcgHyAuNzcrLSs3LSstNzcrKy8rKy83KzUwKy01KysuListLzctLTc3NzcrNzcrNzgtODctN//AABEIAE4AnwMBIgACEQEDEQH/xAAcAAADAAMBAQEAAAAAAAAAAAAABQYBAwQHAgj/xAA4EAACAQMCBAQEBAQGAwAAAAABAgMABBESIQUGEzEiQVFhMnGRwVKBobEHI0JyFBYzNGJzNbPR/8QAGgEBAAMBAQEAAAAAAAAAAAAAAAIDBQQBBv/EACYRAAICAQQBBAMBAQAAAAAAAAABAhEDBBIhMUEFE1FhMoGhIxT/2gAMAwEAAhEDEQA/APcaKK+XcAZJwB67V43XYM0Zrgk4tEO2pvcDb60t4vzIsMbGKMyTEeBCQAT6k+QrmWt07lsU1ZOOOUnSQ6ubuKJS0siRoO7OwUfU1pseK2txnoTxS6e+hw2PyFeOcX4hNNIXunMkvodlT2RPIUtg408EsckTFXRlIx5jO6n2NaMcO5WjWj6S5Qu+f4foIGs1qtn1KreTAN9RW2qDGYUUUUAUUUUAUUUUAUUUUAUUUUAUUUUBrmkCKWYgKoJJPpUlxHixmO3hQdh6+5rt5xvdCRxg7ysSf7Vx9ytSfWrA9WzSk/aj15IudMYTXgRSx8v1PkKUPOSS7nc7k+gHlWm8udTBfJdz/d5Uo4/dlIGA+KQaPkp+I/TP1rM0+mSf2zQ00XKvliO6n67ySZIMjEj2Xso+gFctrCzyxxgEu8kaAerMwA/esJJVJ/Dy1WfiUDP8Ftl/nKVOgfufpX1Wl1Twra+jclqf+fE7/R7lbppVV/CAPoK2UCtF3dRwqXlcIg7ljgVe2lyz5VvyzfXJxXiEVrE80x0xxjLbZPyFK05usScdVh/yKMF+td3E/wDDTW79crJbOmWOcqV9cioxyQfkQnBvl8eTVy/x+34hGZbcnSraWDDBB96bUl5YtrGKErYACLUckat299VdCcbtSJCJhiD/AFM5GnfHn37VKU4eHwSySx7m4deLGdFKuF8dt7pmSFmLKMnKlds4zvWeI8dtbc6ZZQG/Cvib6DtUfcjV3wV7lV2NKKQ2/Ndi5x1dB/5qVH1p5navYzjLp2FJPoyaXz8Zt45lgd8TNpAXBPxdt65b3mayhYq0uph3CDXj8xUpd30dxxKCSJiyF4BuMbg77VRlzqNbXzZCeRLpnoorNYFZrpLSG59ciaD06UmPnqXP2qZ6lWH8QbQtHFMo/wBJmVv7Xxv9QtQ2qsHW4/8AZtnJllUjn6uST6kmp3mW7y6pnsMn7fenEz6M5/pqSkElzKxRS7MdsDO32pp4c2fSenqNb30kETMxVUUtIxwqjzavROVLUWhgQHL9RGdvxOSMmknA+ELbjU5DTEYyOyD8K1U8uwmW6hUDIDhj8l3Ne5Z75KMTL9Q16z5FCH4o9UFQnNLtc30VrqIjBjBx6sMk/SrsVA8wsbbicc7DwExtn2C6WrT1P4L4tWcmf8f2Uz8uWZj6fRUDAGoAB8+uqufidgltw+aKPOlY23Y5JJO5NOUu4iocSIUIzq1DGPXNLuYJlksp2RgytGSGU5BHtU5Rgotr4JNRp0LuQP8AbP8A9rfsKRcMs1uOITxPkxdSZ3XOA2iQ6QfzNPeQP9s3/a37ClfLf/lLj53P/sFc1XHGinuMCkvoILKGaaGJEdYyPCMZ9AfzpJyVwtJlkuZwJXd2A1+L5nB86f8ANMJe0nC5J0529iD9qV8g3aG3aPI1xuxI88Hsf3q2SXvJPqibS9xIU8/W0cbwdNEQsHzpAXOCO+KoebL5oLUlDh30oCPLPc/oan/4gzq0sKggsitq9skY/Y0356iLWikDOh4yflgj71VdPJtIXTnRjlHgsK26SPGrySjVlgGwvkBmk/FYEj4rCI1VF1wHCjAyTvVLyndo9pEARmNdDexFTXFpkfisRRgwWSBSQc7g7imRRWOFfKEktkaPQBWawKzWgdRou7ZJUaNxlHBUj2NeWcb4TJaSFXBKH4H8mH/2vWa576yinQpKgZT6/b0rm1GD3V9lWXGpo8ZliR/iUH50QxIgwiqo9hira/5GOSbeUY/DJ5fmK4k5Juyd2iA9ck/pisx4Mq4o5nDMltt1/CazV9yRwYxKZ5VKvIMID3VPU+ma28G5RggIeUmaQdsjCA+uPOqcCuzTaVxe6Rbhw7Xcgrg4rwqG6TRMpONwRsyn1BphSy7llWU6UkYGIhdIJXqZOM+nlXe0mqZ0NJ8MSLyTDnH+ImKZ+EaRt88U7HCIRbm2XUsRVhsctudzk0vkt7vo9PSS6y5H8xjqQxE/EN/i+1fMUU2T1VnZep49OvUU0tp3DYO+ntVccMI9IiscV0hpwfhcdohjiLlSxbxkE5I9h7VosuAQQzvcI0hkk15BIK+I5OBiuS6jvCDjV08y4AD6tPWTGcHfwhu1fBt7jWzMsvROjIRn1MuUyMZ2xg9t+9S9uPHHR7tXH0UbYOx7VNXHJ0BcvDLNASSSEIxv6elbbqK80t09XT1nSvi6gTo+Z1etbp0uCIOkraY11nLNHltQ2wdztr2PrSeOM+0HFS7NUnKVq0YjJl2YsX1AuzEY3JFOpLdHQxuNaFdJB3yMVPyQ3DKixxzKy4MrO7AmTTuV33x39K2dC5LeDrKwYmRmYhWcOSmnfcY749RSOOMekFFLo5/8mQhiY7ieND3VSO3pmu7/ACvahoHXWht8FdJHiIbOWyN965FiumT4Z0ndcE68hUaPHfOMgn9Ky0V9qJYS6To1BXHwqCHC4Pcjf86isEF4PFjivBTA1nNTkTTkERrPpkaLpE/0qsrag2Tldsd6ZcEVxCokDB/6tQcEtgZ7k1aTGVFFFAFFFFAFFFFAFJuKC56n8gkBY9XlpJycjGPEfzpzWMUBOJeSrqw8zoUIjZoyWMpC7fD7nv7+lZtZ7lUlaQuCDERkatjIdRGBsMeVUOijFAJRcSNJOQ7aRFmIDUMgoDqA077k+dcYaR5IgJJTCCSHfUv83SuBnT4vifvVNpo0UBOm5uWMZcuinqKRgrmRNI8l8z1PbavuS8kZISryg9JfgQ+Ofw5V9tu5/X0p/po00BNxJfMY/E4Dl23b4cEbt4exz2r5hubvEZUyOxEvUXTq8baQnddsEk1TBaNNATMEt4cqXcSDpKpIwDjTliMY3OfrXdwtpZHV3MyhoySjbAN1CMEY9MU401nFAArNFFAf/9k="),
@@ -216,9 +243,9 @@ div2= Node(
         :div,
      
        style=Dict(
-        :backgroundColor => "white",#rgba(196, 196, 196, 0.18)#rgba(241, 247, 213, 0.39)rgba(241, 247, 213, 0.25)
-        :padding=>"50px",#100px
-        :border=>"solid 0.07px grey"#rgba(111, 188, 96, 1)
+        :backgroundColor => "#dcdadb",#rgba(196, 196, 196, 0.18)#rgba(241, 247, 213, 0.39)rgba(241, 247, 213, 0.25)
+        #:padding=>"50px"#100px
+        #:border=>"solid 0.07px grey"#rgba(111, 188, 96, 1)
 
     ),
     
@@ -228,8 +255,8 @@ div2= Node(
 #put the div2 on the right side of param2 (radio_buttons)
 # Merge div2 on the right with param_2
 
-param_2=hbox(param2bis, vline())
-#div2)
+param_2=hbox(param2bis, #vline())
+div2)
 
 
 #param_2=hbox(param2line,CSSUtil.vline(),div2)
@@ -242,12 +269,12 @@ body!(w,param_2)
 
 
 #Merge left side(param1) and right side(param2)
-param_12=hbox(param1#_1
-,param_2)
+param_12=hbox(param_1,param2bis)#_1
+#,param_2)#, vline())
 w= Window()
 body!(w,param_12)
 
-#Add a colored background div
+#Add a colored background div to param_12
 param_all= Node(
         :div,
         #hskip(1000em),
@@ -255,14 +282,14 @@ param_all= Node(
         #hbox(vbox(
          #       dom"img"(src= "data:image/jpeg;base64,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"),
          #       vskip(100px),
-         #       dom"img"(src= "data:image/jpeg;base64,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")),
+       #logo,
 #vline(),                
 param_12,
 style=Dict(
         :backgroundColor => "rgba(241, 247, 213, 0.53)",#vert clair=rgba(184, 244, 190, 0.36)rgba(241, 247, 213, 0.53)rgba(241, 247, 213, 0.39)
         :color => "black",
         #:padding=>"300px"
-        :border=>"solid 0.2px "#rgba(111, 188, 96, 1) = green
+        #:border=>"solid 0.2px "#rgba(111, 188, 96, 1) = green
 
     ),
 )
@@ -271,14 +298,16 @@ w= Window()
 body!(w,param_all)
 
 
-ui1=hbox(vbox(div1,vskip(300px),logo),vline(),
+# Add CIRAD logo on the left 
+ui1=hbox(vbox(vskip(300px),#vbox(div1,vskip(300px),
+logo),
 param_all)  # ui1=hbox(logo,param_all) 
 w=Window()
 body!(w,ui1)
 
-#Merge tab buttons with param_12
+#Merge tab buttons with ui1 add div2 on the right to leave a space
 ui2=vbox(
-    hbox(hskip(145px),tab),ui1
+    hbox(hskip(163px),tab),hbox(ui1,div2,hskip(20px),div2)
     )
 
 w= Window()
