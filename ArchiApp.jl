@@ -64,11 +64,11 @@ pixel_size=textbox(label = "Pixel size",
 param1=vbox(
         vskip(50px),
         hbox(hskip(150px),
-        img,hskip(5px),config_file),
+        icon,hskip(5px),config_file),
         vskip(50px),#hskip(148px),
         hbox(hskip(120px),
-        img,hskip(5px),sky_sector),
-        vskip(20px),hbox(img,hskip(5px),scene_rotation),vskip(10px),hbox(img,hskip(5px),radiation_tps), vskip(10px),hbox(img,hskip(5px),pixel_size))
+        icon,hskip(5px),sky_sector),
+        vskip(20px),hbox(icon,hskip(5px),scene_rotation),vskip(10px),hbox(icon,hskip(5px),radiation_tps), vskip(10px),hbox(icon,hskip(5px),pixel_size))
         
 #Show the result
 w= Window()
@@ -103,8 +103,8 @@ cache_radiation= radiobuttons(optionsr,label="Cache radiation")
 
 
 param2=vbox(hbox(
-    img,All_in_turtle,img,scattering,img,toricity),
-   hbox(img,cache_pixel_table,hskip(50px),img,cache_radiation) 
+    icon,All_in_turtle,icon,scattering,icon,toricity),
+   hbox(icon,cache_pixel_table,hskip(50px),icon,cache_radiation) 
 )
 
 
