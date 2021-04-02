@@ -1,20 +1,45 @@
-using Blink, WebSockets, WebIO, Interact, Observables, CSSUtil, Markdown, ImageShow, Colors, AssetRegistry
+using Blink, WebSockets, WebIO, Interact, Observables, CSSUtil, Markdown, ImageShow, Colors, AssetRegistry #, #OrderedCollection, YAML
 
 #Generate a unique url key for assets
 icon_key = AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/icon.png")
-coffee_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/coffee_animation.gif")
-tree_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/tree.gif")
+coffee_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/coffee.png")#coffee_animation.gif
+tree_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/tree.png")#tree.gif
 palm_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/palm1.png")
-logo1_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/amap.png")
+logo1_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/amap_logo.png")
 logo2_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/logo2.png")
 ##########################Tbbed menu###########################
 
 #Buttons as an ordred Dict
 
+#Method 1
+
+b1=dom"button"("Configuration",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:fontSize=>"weight",:border=>" 1px red", :width => "100px",
+   :height => "100px"))
+   b2=dom"button"("Simulation",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red", :width => "100px",
+   :height => "100px"))
+   b3=dom"button"("output",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   :height => "100px"))
+   b4=dom"button"("Input",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   :height => "100px"))
+   b5=dom"button"("Output",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   :height => "100px"))
+   b6=dom"button"("Settings",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   :height => "100px"))
+   b7=dom"button"("Scene/Model",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   :height => "100px"))
+   b7=dom"button"("Meteo",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   :height => "100px"))
+
+
+   b=vbox(hbox(b1,b2,b3),hbox(b4,b5),hbox(b6,b7))
+
+
+
+#Method 2
 
 tab= Widget{:test}(OrderedDict(
   #rgb(164, 214, 225)
-    :btn_input=>button("Input", style=Dict(:background=>"rgba(122, 199, 199, 0.62)", :color=>"black", :size=>"20px")),#:border=>"solid 1px")),
+    :btn_input=>button("Configuration", style=Dict(:background=>"rgba(122, 199, 199, 0.62)", :color=>"black", :size=>"20px")),#:border=>"solid 1px")),
     :btn_sim=>button("Simulation", style=Dict(:border=>"solid 1px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black", :size=>"20px")),#:border=>"solid 1px")),
     :btn_output=>button("Output",style=Dict(:border=>"solid 1px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:size=>"10em")),#)#:border=>"solid 1px"))
     :btn_set=>button("Settings", style=Dict(:background=>"rgba(122, 199, 199, 0.62)", :color=>"black",:fontsize=>"10px")),#:border=>"solid 1px"))
@@ -97,12 +122,23 @@ body!(w, images)
 
 optionsd = Observable(["1", "6", "16", "46", "136","406"])
 #wdgd = dropdown(options, label="Sky sectors")
-optionsd[] = ["1", "6", "16", "46", "136","406"]
+#optionsd[] = ["1", "6", "16", "46", "136","406"] A verifier
 
 
 config_file=filepicker(label="Choose the config file", style=Dict(:color=>"black"); multiple=false, accept=".yml")
 
+#config=read.yml() return Dict type=OrderDict
+file="E:/Stage_julia/ExemplAppli/src/Test/config.yml"
+model = YAML.load_file(file; dicttype=OrderedDict{String,Any})
+
+
+
 sky_sector=dropdown(optionsd, label="Sky sectors")
+
+
+model["sky_sectors"]=sky_sector
+
+
 
 scene_rotation=textbox(style=Dict(:border=>"solid 1px",:background=>"white", :color=>"black", :size=>"10px"),
         label = "Scene rotation",
@@ -423,6 +459,17 @@ body!(w,UI)
 
 
 ###########"#Some tests#################################################
+
+#How to change CSS style by creating a new theme("mytheme") background color for button using variable_file 
+using Interact
+using InteractBulma: compile_theme, examplefolder
+variables_file = joinpath(examplefolder, "flatly", "_variables.scss") # here you would use your own style
+mytheme = compile_theme(variables = variables_file)
+settheme!(mytheme)
+
+
+
+
 
 uitest=hbox(
         vbox(
