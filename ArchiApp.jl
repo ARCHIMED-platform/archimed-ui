@@ -1,12 +1,14 @@
-using Blink, WebSockets, WebIO, Interact, Observables, CSSUtil, Markdown, ImageShow, Colors, AssetRegistry #, #OrderedCollection, YAML
+using Blink, WebSockets, WebIO, Interact, Observables, CSSUtil, Markdown, ImageShow, Colors, AssetRegistry , OrderedCollections, YAML
 
 #Generate a unique url key for assets
-icon_key = AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/icon.png")
-coffee_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/coffee.png")#coffee_animation.gif
-tree_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/tree.png")#tree.gif
-palm_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/palm1.png")
-logo1_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/amap_logo.png")
-logo2_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/assets/logo2.png")
+icon_key = AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/assets/icon.png")
+icon2_key = AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/assets/icon2.png")
+#E:\Stage_julia\ExemplAppli\Archimed_Application\archimed-ui\assets
+coffee_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/assets/coffee.png")#coffee_animation.gif
+tree_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/assets/tree.png")#tree.gif
+palm_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/assets/palm3.png")
+logo1_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/assets/amap_logo.png")
+logo2_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/assets/logo2.png")
 ##########################Tbbed menu###########################
 
 #Buttons as an ordred Dict
@@ -15,23 +17,30 @@ logo2_key= AssetRegistry.register("E:/Stage_julia/ExemplAppli/Archimed_Applicati
 
 b1=dom"button"("Configuration",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:fontSize=>"weight",:border=>" 1px red", :width => "100px",
    :height => "100px"))
-   b2=dom"button"("Simulation",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red", :width => "100px",
+   
+b2=dom"button"("Simulation",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red", :width => "100px",
    :height => "100px"))
-   b3=dom"button"("output",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+
+b3=dom"button"("output",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
    :height => "100px"))
-   b4=dom"button"("Input",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   
+b4=dom"button"("Input",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
    :height => "100px"))
-   b5=dom"button"("Output",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   
+b5=dom"button"("Output",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
    :height => "100px"))
-   b6=dom"button"("Settings",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   
+b6=dom"button"("Settings",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(122, 199, 199, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
    :height => "100px"))
-   b7=dom"button"("Scene/Model",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+   
+b7=dom"button"("Scene/Model",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
    :height => "100px"))
-   b7=dom"button"("Meteo",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
+  
+b8=dom"button"("Meteo",style=Dict(:borderRadius=> "10px",:padding=>"20px",:background=>"rgba(196, 196, 196, 0.62)",:color=>"black",:font=>"weight",:border=>" 1px red",:width => "100px",
    :height => "100px"))
 
 
-   b=vbox(hbox(b1,b2,b3),hbox(b4,b5),hbox(b6,b7))
+   b=vbox(hbox(b1,b2,b3),hbox(b4,b5),hbox(b6,b7,b8))
 
 
 
@@ -65,44 +74,51 @@ icon2= Node(
 ######Create a node with a div to information icon and images: coffe, growing tree, palm and logos  ##########
 
 icon_key
-icon=
-Node(
+icon= Node(
         #hskip(100em),
         :div,
-        dom"img"(src="/assetserver/f45aa1725c3438fe4969c23f5465c8527a087316-icon.png")
+        dom"img"(src= "/assetserver/481517802c012771324d333bd380a65f9f4f17d5-icon.png") #"/assetserver/f45aa1725c3438fe4969c23f5465c8527a087316-icon.png")
 )   
+
+icon2_key
+icon2= Node(
+        #hskip(100em),
+        :div,
+        dom"img"(src= "/assetserver/7a74953d7ebd73fcb261fefb1ea98385d5a9427a-icon2.png") #"/assetserver/f45aa1725c3438fe4969c23f5465c8527a087316-icon.png")
+) 
+
 
 
 coffee_key
 img_coffee=Node(
         :div,
-        dom"img"(src="/assetserver/394b3aa09cf127c8fde965481baf6db59d63580e-coffee_animation.gif")
+        dom"img"(src="/assetserver/2ac08712dd495dd9f6788d048f12ec4c879a9b83-coffee.png") #"/assetserver/394b3aa09cf127c8fde965481baf6db59d63580e-coffee_animation.gif")
 )
 
 tree_key
 img_tree=Node(
         :div,
-        dom"img"(src="/assetserver/1a4ea4ea662b062ab1e4488fde325d46448830de-tree.gif")
+        dom"img"(src="/assetserver/a956b7fc07748699715f01f6a457f9c394e8c08f-tree.png") #"/assetserver/1a4ea4ea662b062ab1e4488fde325d46448830de-tree.gif")
        
 )
 
 palm_key
 img_palm=Node(
         :div,
-        dom"img"(src="/assetserver/0a3e740be9e89bb5f53888c5278eb708eedaa040-palm1.png")
+        dom"img"(src= "/assetserver/5ad3fe23cd721e7c915f6efdd7653a1856c54019-palm3.png")#"/assetserver/0a3e740be9e89bb5f53888c5278eb708eedaa040-palm1.png")
 )
 
 logo1_key
 logo1=Node(
         :div,
-        dom"img"(src="/assetserver/b7d3c7db9554b821703d9724547ddd562ef41ed3-amap.png")
+        dom"img"(src= "/assetserver/2472b409007a2c8d4d07710da7345aafac013e66-amap_logo.png") #"/assetserver/b7d3c7db9554b821703d9724547ddd562ef41ed3-amap.png")
 )
 
 
 logo2_key
 logo2=Node(
         :div,
-        dom"img"(src="/assetserver/ef8df61f8260f8b6c5f1b1b609404bfd06c17947-logo2.png")
+        dom"img"(src="/assetserver/7bea73482bd13e8412f00290b85fdd6d26ebfc71-logo2.png") #"/assetserver/ef8df61f8260f8b6c5f1b1b609404bfd06c17947-logo2.png")
 )
 
 ################################## Create a div with all the images################################
@@ -117,43 +133,119 @@ body!(w, images)
 
 
 ##########################Left-side, Parameters 1= Textboxes###########################
+#Path to the config file example to be replaced by joinpath
+
+#file="E:/Stage_julia/ExemplAppli/src/Test/config.yml"
+
+file="E:/Stage_julia/ExemplAppli/Archimed_Application/archimed-ui/default_files/config.yml"
+
+#joinpath(dirname(pathof(archimedUI)),"../default_files/config.yml")
 
 # Create parameters inputs and Display them on the left side . The position of the "style=Dict()" has no effect on the results
 
-optionsd = Observable(["1", "6", "16", "46", "136","406"])
+config_file=filepicker(label="Choose the config file", style=Dict(:color=>"black"); multiple=false, accept=".yml")
+
+#config=read.yml() return Dict type=OrderDict   #lire fichier dans dict change valeur ecrire duirectelent dans dict
+ 
+
+model = YAML.load_file(file; dicttype=OrderedDict{String,Any})
+
+# make observable on buttons save and save as 
+#save as or save buttons 
+
+YAML.write_file("test-output.yml", data)
+
+
+
+model["scene_rotation"]=2
+
 #wdgd = dropdown(options, label="Sky sectors")
 #optionsd[] = ["1", "6", "16", "46", "136","406"] A verifier
 
-
-config_file=filepicker(label="Choose the config file", style=Dict(:color=>"black"); multiple=false, accept=".yml")
-
-#config=read.yml() return Dict type=OrderDict
-file="E:/Stage_julia/ExemplAppli/src/Test/config.yml"
-model = YAML.load_file(file; dicttype=OrderedDict{String,Any})
-
+#créer variable sky sector qui est observable
+# créer un dict avec valeurs par default
+#model=Dict()
+skysector_default=[1, 6, 16, 46, 136,406]
+skysectors= dropdown(skysector_default)#, label="Sky sectors")
 
 
-sky_sector=dropdown(optionsd, label="Sky sectors")
+skysector[]=5
+
+#Another way to code sky_sectors
+label_skysector= Node(
+        :div,
+        node(:label,"Sky sectors", style=Dict(:padding=>"10px 20px",  :backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)")
+      
+      ),
+)
+
+skysector=Node(
+        :div,
+        skysectors#dropdown(skysector_default)
+      )
+      
+h = on(skysectors) do val
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["sky_sectors"]=val
+    end    
+
+skysec= hbox(label_skysector,hskip(10px),skysector)
 
 
-model["sky_sectors"]=sky_sector
-
-
+ #Scene rotation old version
 
 scene_rotation=textbox(style=Dict(:border=>"solid 1px",:background=>"white", :color=>"black", :size=>"10px"),
         label = "Scene rotation",
         value = "0")
         #style=Dict(:border=>"solid 1px",:background=>"rgba(184, 244, 190, 0.36)", :color=>"black", :size=>"10px")),
 
+#Another way to code "scene_rotation"
+label_scenerotation= Node(
+        :div,
+        node(:label,"Scene rotation", style=Dict(:padding=>"10px 20px",  :backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)")
+              
+        ),
+)
+
+scenerotation= textbox(style=Dict(:border=>"solid 1px",:background=>"white", :color=>"black", :size=>"10px"),
+                     value = 0
+)
+
+scen_rota=Node(
+        :div,
+        scenerotation#dropdown(skysector_default)
+        )
+
+hr = on(scenerotation) do valr
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["scene_rotation"]=valr
+end 
+
+scene_rotation= hbox(label_scenerotation,hskip(10px),scenerotation)
+
+# Radiation timestep
+
 radiation_tps=textbox(label = "Radiation timestep",
-        value = "5", 
+        value = 5, 
         style=Dict(:border=>"solid 1px",:background=>"white", :color=>"black", :size=>"10px"))
  
+
+hrad = on(radiation_tps) do valrad
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["radiation_timestep"]=valrad
+end 
+
+
+# Pixel size  
+
 pixel_size=textbox(label = "Pixel size",
-        value = "0.3", 
+        value = 0.3, 
         style=Dict(:border=>"solid 1px",:background=>"white", :color=>"black", :size=>"10px"))
         
-
+hpx = on(pixel_size) do valx
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["pixel_size"]=valx
+end 
 
 param1=vbox(
         vskip(50px),
@@ -161,17 +253,17 @@ param1=vbox(
         #icon,hskip(5px),
         config_file),
         vskip(50px),#hskip(148px),
-        hbox(hskip(120px),
-        icon,#hskip(0.5px),
-        sky_sector),
+        hbox(icon2,#hskip(0.5px),
+        scene_rotation),#scene_rotation),
         vskip(20px),
-        hbox(icon,#hskip(0.5px),
-        scene_rotation),
+        hbox(#hskip(120px),
+        icon,hskip(5px),
+        skysec),#skysector),
         vskip(10px),
         hbox(icon,#hskip(0.5px),
         radiation_tps), 
         vskip(10px),
-        hbox(icon,#hskip(5px),
+        hbox(icon2,#hskip(5px),
         pixel_size))
         
 #Show the result
@@ -180,7 +272,180 @@ body!(w,param1)
 
 
 
-#############################Right-side Parameters 2 = Radio Buttons#######################
+#############################Right-side Parameters 2 = Checkboxes#######################
+# Create checkboxes
+
+# 1) All in turtle
+
+values = ["true", "false"]
+
+#checkboxes(value = value)
+
+all_in_turtle= Node(
+        :div,
+        node(:label,"All in turtle", style=Dict(:padding=>"10px",  :backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
+      
+      ),
+)
+
+All_in_turt = checkbox(values,style=Dict(:border=>"solid 1px black"))
+
+#Make observable on "all in turtle"
+
+
+
+ht = on(All_in_turt) do valt
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["all_in_turtle"]=valt
+end 
+
+
+check_All_in_turt=Node(
+        :div,
+        All_in_turt,#checkbox(style=Dict(:border=>"solid 1px black")),
+      )
+    
+
+a_in_t= hbox(all_in_turtle,hskip(10px),check_All_in_turt)
+
+
+# 2) Scattering
+
+scattering= Node(
+        :div,
+        node(:label,"Scattering", style=Dict(:padding=>"10px",  :backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
+      
+      ),
+)
+
+
+scat = checkbox(values, style=Dict(:border=>"solid 1px black"))
+
+#Make observable on "scattering"
+
+hs = on(scat) do vals
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["scattering"]=vals
+end 
+
+check_scat=Node(
+        :div,
+        scat, #checkbox(style=Dict(:border=>"solid 1px black")),
+      )
+    
+
+scatt= hbox(scattering,hskip(10px),check_scat)
+
+
+# 3) Toricity
+
+toricity= Node(
+        :div,
+        node(:label,"Toricity", style=Dict(:padding=>"10px",  :backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
+      
+      ),
+)
+
+tor = checkbox(values, style=Dict(:border=>"solid 1px black"))
+
+#Make observable on "toricity"
+
+htr = on(tor) do valtr
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["toricity"]=valtr
+end 
+
+
+
+check_tori=Node(
+        :div,
+        tor,#checkbox(style=Dict(:border=>"solid 1px black")),
+      )
+    
+
+torici= hbox(toricity,hskip(10px),check_tori)
+
+
+# 4) Pixel table
+
+c_pixel_table= Node(
+        :div,
+        node(:label,"cache pixel table", style=Dict(:padding=>"10px",  :backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
+      
+      ),
+)
+
+c_pix_table= checkbox(values, style=Dict(:border=>"solid 1px black"))
+
+# Make observable on "pixel table"
+hxt = on(c_pix_table) do valxt
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["cache_pixel_table"]=valxt
+end 
+
+check_pix_table=Node(
+        :div,
+        c_pix_table,#checkbox(style=Dict(:border=>"solid 1px black")),
+      )
+    
+
+c_p_table= hbox(c_pixel_table,hskip(10px),check_pix_table)
+
+# 5) Cache radiation
+
+cache_radiation= Node(
+        :div,
+        node(:label,"cache pixel table", style=Dict(:padding=>"10px",  :backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
+      
+      ),
+)
+
+
+c_radiation=checkbox(values, style=Dict(:border=>"solid 1px black"))
+
+# Make observable on "cache radiation"
+hc = on(c_radiation) do valc
+        #println("Got an update: ", val) # changer la valeur dans le dict
+        model["cache_radiation"]=valc
+end
+
+check_c_radiation=Node(
+        :div,
+        c_radiation,#checkbox(style=Dict(:border=>"solid 1px black")),
+      )
+    
+
+cache_rad= hbox(cache_radiation, hskip(10px), check_c_radiation)
+
+# Join all checkbox parameters in param2
+
+param2 = vbox(vskip(20px),a_in_t,vskip(40px),scatt,vskip(40px),torici,vskip(40px),c_p_table, vskip(40px),cache_rad)
+
+w=Window()
+
+body!(w,param2)
+
+
+
+
+# exemple c=Widgets.checkbox(label = "Check me!", style=Dict(:border=>"solid 1px",:background=>"rgba(184, 244, 190, 0.36)", :color=>"black", :size=>"10px"))
+
+All_in_turtle= checkbox(label="All in turtle")
+
+scattering=checkbox(label="Scattering", 
+         style=Dict(:border=>"solid 1px",:background=>"rgba(184, 244, 190, 0.36)", :color=>"black", :size=>"10px"))
+
+toricity= checkbox(label="Toricity",
+        style=Dict(:border=>"solid 1px",:background=>"rgba(184, 244, 190, 0.36)", :color=>"black", :size=>"10px"))
+
+
+cache_pixel_table= checkbox(label="Cache pixel table")
+
+
+cache_radiation= checkbox(label="Cache radiation")
+
+
+
 
 # Create radiobottuns True/False and display them on the right side
 
@@ -209,6 +474,8 @@ cache_radiation= radiobuttons(optionsr,label="Cache radiation")
 #param2=vbox(hbox(icon,All_in_turtle,icon,scattering,icon,toricity),
 #   hbox(icon,cache_pixel_table,hskip(50px),icon,cache_radiation) 
 #)
+
+
 
 
 param2= vbox(
@@ -287,7 +554,7 @@ divparam2= Node(
 
 #param2bis=vbox(hbox(divparam2,vline()),vskip(77px), hbox(param2,vline()) #param2#param2#, vline() #hbox(param2, #div2))
 
-param2bis=vbox(divparam2,vskip(77px), param2)
+param2bis=vbox(divparam2,vskip(100px), param2)
 
 # Show the result
 w= Window()
@@ -340,7 +607,7 @@ dom"img"(src= "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBw0OEA
 )
 
 
-# Create a div to put on the rignt of radiobuttons(param2) and on the left of textboxes(param1)
+# Create a div to put on the rignt of checkboxes(param2) and on the left of textboxes(param1)
 div2= Node(
         #hskip(100em),
         :div,
