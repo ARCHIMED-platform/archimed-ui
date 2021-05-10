@@ -97,7 +97,7 @@ dom"img"(src= "/assetserver/5ad3fe23cd721e7c915f6efdd7653a1856c54019-palm3.png")
 logo1_key
 logo1=Node(
 :div,
-dom"img"(src= "/assetserver/2472b409007a2c8d4d07710da7345aafac013e66-amap_logo.png") #"/assetserver/b7d3c7db9554b821703d9724547ddd562ef41ed3-amap.png")
+dom"img"(src= "/assetserver/6b005aa2f270f5576a9e5f8a50e0dc4cfac2b273-amap.png") #"/assetserver/b7d3c7db9554b821703d9724547ddd562ef41ed3-amap.png")
 )
 
 logoamap=Node(
@@ -128,12 +128,13 @@ dom"img"(src="/assetserver/a1e2ae231714c8313e3c23a87385443e0b95f62f-logo.png") #
 
 images=vbox(
 #vskip(50px),
-hbox(hskip(10px),img_palm),vskip(30px), hbox(hskip(13px),img_tree),vskip(30px),hbox(hskip(13px),img_coffee),#,vskip(100px), #logo_amap
+hbox(hskip(10px),img_palm),vskip(30px), hbox(hskip(13px),img_tree),vskip(30px),hbox(hskip(18px),img_coffee),#,vskip(100px), #logo_amap
 vskip(30px),
-hbox(hskip(10px),img_palm),vskip(30px), hbox(hskip(13px),img_tree),vskip(30px),hbox(hskip(13px),img_coffee)
+hbox(hskip(10px),img_palm),vskip(30px), hbox(hskip(13px),img_tree),vskip(30px),hbox(hskip(18px),img_coffee),vskip(30px),hbox(hskip(35px),logo1)
 )
 
-
+w=Window()
+body!(w,images)
 
 ##########################Left-side, Parameters 1= Textboxes###########################
 
@@ -273,14 +274,15 @@ hpx = on(pixel_size) do valx
     model["pixel_size"]=valx
 end 
 
-param1=vbox(vskip(20px),
-hbox(hskip(10px),label_settings),
+param1=vbox(
+vskip(20px),
+hbox(hskip(10px),input_settings),
 vskip(50px),
 hbox(hskip(150px),vbox(
 #icon,hskip(5px),
 config_file,#vskip(10px),hbox(hskip(110px),save))),
 vskip(50px),#hskip(148px),
-hbox(icon2,hskip(5px),
+hbox(icon,hskip(5px),
 scene_rotation),#scene_rotation),
 vskip(20px),
 hbox(#hskip(120px),
@@ -290,11 +292,10 @@ vskip(10px),
 hbox(icon,#hskip(0.5px),
 radiation_tps), 
 vskip(10px),
-hbox(icon2,#hskip(5px),
+hbox(icon,#hskip(5px),
 pixel_size),
 vskip(50px),hbox(hskip(300px),save)))
 )
-
 
 
 #############################Right-side Parameters 2 = Checkboxes#######################
@@ -441,11 +442,16 @@ cache_rad= hbox(cache_radiation, hskip(10px), check_c_radiation)
 # Join all checkbox parameters in param2
 
 param2 = vbox(
-vskip(20px),hbox(icon2,hskip(5px),a_in_t),
-vskip(10px),hbox(icon,scatt),
-vskip(20px),hbox(icon,torici),
-vskip(30px),hbox(icon2,hskip(5px),c_p_table),
-vskip(30px),hbox(icon,cache_rad)
+vskip(20px),
+hbox(icon2,hskip(5px),a_in_t),
+vskip(10px),
+hbox(icon2,hskip(5px),scatt),
+vskip(20px),
+hbox(icon2,hskip(5px),torici),
+vskip(30px),
+hbox(icon2,hskip(5px),c_p_table),
+vskip(30px),
+hbox(icon2,hskip(5px),cache_rad)
 
 )
 
@@ -467,7 +473,7 @@ style=Dict(
 
 # Put the div on top of checkbottons (parameter 2)
 
-param2bis=vbox(divparam2,vskip(110px), 
+param2bis=vbox(divparam2,vskip(145px), 
 param2)
 
 
@@ -545,7 +551,7 @@ node(:label,"Scene / Model", style=Dict(:padding=>"20px", :color=>"black",:backg
 
 label_ops= Node(
 :div,
-node(:label,"Choose the ops file", style=Dict(:padding=>"20px", :color=>"black",:backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
+node(:label,"Choose the ops file", style=Dict(:padding=>"5px", :color=>"black",:backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
 
 ),
 )
@@ -591,7 +597,7 @@ style=Dict(:color=>"black",:backgroundColor => "rgba(184, 244, 190, 0.36)",:bord
 
 label_soil= Node(
 :div,
-node(:label,"Choose the soil file", style=Dict(#:padding=>"10px", 
+node(:label,"Choose the soil file", style=Dict(:padding=>"5px", 
 :color=>"black",:backgroundColor => "rgba(184, 244, 190, 0.36)",:border=>"solid 1px rgba(184, 244, 190, 0.36)"),
 
 ),
@@ -733,7 +739,7 @@ hbox(hskip(200px), file_meteo),
 vskip(30px),
 hbox(hskip(200px),icon,label_meteo_range, hskip(10px), meteo_range),
 vskip(30px),
-hbox(hskip(200px),icon2,label_meteo_range, vskip(20px), meteorange_bis)
+hbox(hskip(200px),icon2,hskip(5px),label_meteo_range, vskip(20px), meteorange_bis)
 
 
 )
@@ -775,7 +781,8 @@ hbox(hskip(150px),tab),vskip(5px),ui1
 
 
 ################################# Add the top menu buttons to all (put all in a div)##################
-logos=hbox(hskip(1800px),logo3,amaplab)#logos=hbox(hskip(150px),logoamap,hskip(500px),logo2)
+logos=hbox(hskip(1200px),logo3#,amaplab
+)#logos=hbox(hskip(150px),logoamap,hskip(500px),logo2)
 
 
 
